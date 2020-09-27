@@ -45,7 +45,7 @@ bool pilhavazia(){
     return false;
 }
 
-//Movimentação
+//Movimentaï¿½ï¿½o
 estado moverCima(estado cima){
 	if(cima.x-1 >= 0){
 		cima.x--;
@@ -76,39 +76,35 @@ estado moverBaixo(estado baixo){
 }
 
 bool visitado(estado inicial){
-	estado aux = top();
-	if(inicial.x == aux.x && inicial.y == aux.y){
-		if(pilhavazia()){
-			return false;
+	if(!pilhavazia()){
+		estado aux = top();
+		if(inicial.x == aux.x && inicial.y == aux.y){
+			return true;
 		}
-		return true;
 	}
-
 	return false;
 }
 
 void buscarSaida(estado inicial, estado saida, char maze[][saida.y+2]){
 	if(maze[inicial.x][inicial.y] == '#' || visitado(inicial)){
-		printf("\nParede\n");
 		return;
 	}
 	if(inicial.x == saida.x && inicial.y == saida.y){
 		printf("\nAchei a saida!!!");
-		system("pause");
 		return;
 	}
 	push(inicial);	
 	
-	printf("\n(%d, %d)", inicial.x, inicial.y);
+	//printf("\n(%d, %d)", inicial.x, inicial.y);
 	buscarSaida(moverBaixo(inicial), saida, maze);
 
-	printf("\n(%d, %d)", inicial.x, inicial.y);
+	//printf("\n(%d, %d)", inicial.x, inicial.y);
 	buscarSaida(moverDireita(inicial), saida, maze);
 
-	printf("\n(%d, %d)", inicial.x, inicial.y);	
+	//printf("\n(%d, %d)", inicial.x, inicial.y);	
 	buscarSaida(moverEsquerda(inicial), saida, maze);
 	
-	printf("\n(%d, %d)", inicial.x, inicial.y);
+	//printf("\n(%d, %d)", inicial.x, inicial.y);
 	buscarSaida(moverCima(inicial), saida, maze);
 }
 
