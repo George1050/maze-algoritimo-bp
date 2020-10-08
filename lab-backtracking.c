@@ -50,30 +50,32 @@ bool pilhavazia(){
 
 //Movimentação
 estado moverCima(estado cima){
+	if(cima.y == y-1){
+		return cima;
+	}
 	if(cima.x-1 >= 0){
 		cima.x--;
-		return cima;
 	}
 	return cima;
 }
 estado moverDireita(estado direita){
 	if(direita.y+1 < y){
 		direita.y++;
-		return direita;
 	}
 	return direita;
 }
 estado moverEsquerda(estado esquerda){
+	if(esquerda.x == x-1){
+		return esquerda;
+	}
 	if(esquerda.y-1 > 0){
 		esquerda.y--;
-		return esquerda;
 	}
 	return esquerda;
 }
 estado moverBaixo(estado baixo){
 	if(baixo.x+1 < x){
 		baixo.x++;
-		return baixo;
 	}
 	return baixo;
 }
@@ -119,26 +121,28 @@ int main(){
 	setbuf(stdin, NULL);
 	
 	char maze[x][y];
-	
+
+	//Já tentei com gets() e não funcionou
 	printf("Desenhe o labirinto: ");
-	gets(maze);
+	scanf("%s", &maze);
 	setbuf(stdin, NULL);
 	
 	inicial.x = 0;
 	inicial.y = 1;
 	final.x = x-1;
 	final.y = y-2;
-	
+	printf("\n");
 	for(int i = 0; i<x; i++){
 		for(int j = 0; j<y; j++){
 			printf("%c", maze[i][j]);
 		}
 		printf("\n");
 	}
+	
 	criapilha();
 	buscarSaida(inicial, final, maze);
 
-	
+	//Mostra o caminho na tela.
 	int i = 0;
 	printf("Caminho");
 	while(!pilhavazia()){
